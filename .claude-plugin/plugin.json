@@ -1,0 +1,8 @@
+{
+  "name": "pdf-to-image",
+  "description": "Convert PDF files to JPEG images with target file size control",
+  "author": {
+    "name": "fst",
+    "email": ""
+  }
+}
