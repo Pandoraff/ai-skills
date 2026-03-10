@@ -1,6 +1,6 @@
-# claude-skills
+# ai-skills
 
-个人 Claude Code Skills 合集。每个 skill 是一个可安装到 Claude Code 的功能扩展。
+AI Skills 合集，供各类 AI 编程助手（Claude Code、GitHub Copilot 等）使用的功能扩展。
 
 ## Skills 列表
 
@@ -11,11 +11,11 @@
 ## 仓库结构
 
 ```
-claude-skills/
+ai-skills/
 ├── CLAUDE.md                   # AI 操作指南（添加/修改 skill 的规范）
 ├── README.md                   # 本文件
 ├── .claude-plugin/
-│   └── plugin.json             # 插件清单
+│   └── plugin.json             # Claude Code 插件清单
 └── skills/
     └── <skill-name>/
         ├── SKILL.md            # Skill 定义（必须）
@@ -24,7 +24,7 @@ claude-skills/
         └── assets/             # 静态资源（可选）
 ```
 
-## 贡献 / 添加新 Skill
+## 添加新 Skill
 
 详见 [CLAUDE.md](CLAUDE.md)，其中包含完整的目录规范、SKILL.md 写作要求和更新检查清单。
 

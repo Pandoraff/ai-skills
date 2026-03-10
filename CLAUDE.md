@@ -6,18 +6,18 @@
 
 ## 仓库用途
 
-这是一个 **Claude Code Skills 合集仓库**。每个 skill 是一个可安装到 Claude Code 的功能扩展，放在 `skills/` 目录下。
+这是一个 **AI Skills 合集仓库**（仓库名：`ai-skills`）。每个 skill 是一个可安装到 AI 编程助手的功能扩展，放在 `skills/` 目录下。当前主要支持 Claude Code，未来可扩展至其他 AI 助手。
 
 ---
 
 ## 目录结构
 
 ```
-claude-skills/                        ← 仓库根目录
+ai-skills/                            ← 仓库根目录
 ├── CLAUDE.md                         ← 本文件（AI 操作指南）
 ├── README.md                         ← 仓库总览（面向人类读者）
 ├── .claude-plugin/
-│   └── plugin.json                   ← 插件清单（仓库级元信息）
+│   └── plugin.json                   ← Claude Code 插件清单
 └── skills/
     ├── pdf-to-image/                 ← skill 示例
     │   ├── SKILL.md                  ← skill 定义（必须）
@@ -48,7 +48,7 @@ SKILL.md 是每个 skill 的核心文件，格式如下：
 ---
 name: skill-name
 description: 一句话说明该 skill 的用途和触发时机。描述要具体，
-  包含用户可能说出的关键词，让 Claude 能准确判断何时使用它。
+  包含用户可能说出的关键词，让 AI 能准确判断何时使用它。
 ---
 
 # Skill 标题
@@ -67,7 +67,7 @@ description: 一句话说明该 skill 的用途和触发时机。描述要具体
 | 目录 | 用途 |
 |------|------|
 | `scripts/` | 可执行脚本（Python、Shell 等），减少重复工作 |
-| `references/` | 供 Claude 按需读取的参考文档 |
+| `references/` | 供 AI 按需读取的参考文档 |
 | `assets/` | 模板文件、图标等静态资源 |
 
 ### 4. 更新根目录 README.md
@@ -113,10 +113,10 @@ git push
 ## SKILL.md 写作规范
 
 - **frontmatter `name`**：与目录名保持一致
-- **frontmatter `description`**：面向 Claude 触发判断，不是面向用户的说明，要包含具体触发词
-- **正文**：面向执行 skill 的 Claude，使用祈使句，解释"为什么"而非只写"做什么"
+- **frontmatter `description`**：面向 AI 触发判断，不是面向用户的说明，要包含具体触发词
+- **正文**：面向执行 skill 的 AI，使用祈使句，解释"为什么"而非只写"做什么"
 - **长度**：尽量控制在 500 行以内；如内容多，拆分到 `references/` 子文件并在 SKILL.md 中注明何时读取
-- **脚本引用**：在 SKILL.md 中写明脚本路径和调用方式，让 Claude 知道脚本的存在
+- **脚本引用**：在 SKILL.md 中写明脚本路径和调用方式，让 AI 知道脚本的存在
 
 ---
 
