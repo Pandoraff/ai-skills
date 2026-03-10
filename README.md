@@ -1,74 +1,48 @@
-# pdf-to-image
+# claude-skills
 
-A Claude Code skill that converts PDF files to JPEG images with precise file size control.
+个人 Claude Code Skills 合集。每个 skill 是一个可安装到 Claude Code 的功能扩展。
 
-## Features
+## Skills 列表
 
-- **Multi-backend support** — auto-detects the best available tool
-- **Target size control** — binary-search over JPEG quality to hit your desired file size
-- **Multi-page handling** — each page becomes a separate JPEG (`name_1.jpg`, `name_2.jpg`, ...)
-- **Cross-platform** — works on Linux, macOS, and Windows (WSL)
+| Skill | 描述 |
+|-------|------|
+| [pdf-to-image](skills/pdf-to-image/) | 将 PDF 转换为 JPEG 图片，支持目标文件大小控制 |
 
-## Backend priority
+## 仓库结构
 
-| Priority | Tool | Install |
-|----------|------|---------|
-| 1 | Ghostscript (`gs`) | `apt install ghostscript` / `brew install ghostscript` |
-| 2 | `pdftoppm` + ImageMagick `convert` | `apt install poppler-utils imagemagick` |
-| 3 | `pdftoppm` only | `apt install poppler-utils` |
-| 4 | Python `pdf2image` | `pip install pdf2image` |
-| 5 | Python `fitz` (PyMuPDF) | `pip install pymupdf` |
+```
+claude-skills/
+├── CLAUDE.md                   # AI 操作指南（添加/修改 skill 的规范）
+├── README.md                   # 本文件
+├── .claude-plugin/
+│   └── plugin.json             # 插件清单
+└── skills/
+    └── <skill-name>/
+        ├── SKILL.md            # Skill 定义（必须）
+        ├── scripts/            # 辅助脚本（可选）
+        ├── references/         # 参考文档（可选）
+        └── assets/             # 静态资源（可选）
+```
 
-## Usage
+## 贡献 / 添加新 Skill
 
-### As a Claude Code skill
+详见 [CLAUDE.md](CLAUDE.md)，其中包含完整的目录规范、SKILL.md 写作要求和更新检查清单。
 
-Install via Claude Code skill manager, then just ask:
+---
 
-> "把这几个 PDF 转成 JPEG，大小控制在 250KB 左右"
+## pdf-to-image
 
-### Direct script usage
+将 PDF 文件转换为 JPEG 图片，精准控制输出文件大小。
+
+**特性：**
+- 多后端自动检测：`gs` → `pdftoppm+convert` → `pdftoppm` → `pdf2image` → `fitz`
+- 二分法质量调节，命中目标 KB 大小
+- 多页 PDF 自动按页分割输出
+
+**快速使用：**
 
 ```bash
-# Basic — outputs alongside source PDF, targets 250KB
-python3 skills/pdf-to-image/scripts/pdf2jpeg.py input.pdf
-
-# Custom target size
-python3 skills/pdf-to-image/scripts/pdf2jpeg.py input.pdf --target-kb 300 --tolerance-kb 40
-
-# Custom output directory
-python3 skills/pdf-to-image/scripts/pdf2jpeg.py input.pdf --output-dir ./images/
-
-# Batch conversion
-for f in *.pdf; do
-    python3 skills/pdf-to-image/scripts/pdf2jpeg.py "$f" --target-kb 250
-done
-
-# Force a specific backend
-python3 skills/pdf-to-image/scripts/pdf2jpeg.py input.pdf --backend gs
+python3 skills/pdf-to-image/scripts/pdf2jpeg.py input.pdf --target-kb 250
 ```
 
-### Script options
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `--target-kb` | 250 | Target file size in KB |
-| `--tolerance-kb` | 30 | Acceptable deviation in KB |
-| `--output-dir` | same as input | Output directory |
-| `--prefix` | input filename stem | Output filename prefix |
-| `--dpi` | 150 | Rendering DPI |
-| `--backend` | auto | Force backend: `gs`, `pdftoppm+convert`, `pdftoppm`, `pdf2image`, `fitz` |
-
-## File structure
-
-```
-pdf-to-image/
-├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
-├── skills/
-│   └── pdf-to-image/
-│       ├── SKILL.md          # Skill definition & instructions
-│       └── scripts/
-│           └── pdf2jpeg.py   # Conversion script
-└── README.md
-```
+详细文档见 [skills/pdf-to-image/SKILL.md](skills/pdf-to-image/SKILL.md)。
